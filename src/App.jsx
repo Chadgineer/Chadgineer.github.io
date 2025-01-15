@@ -22,7 +22,9 @@ function App() {
           count is {count}
         </button>
         <p>
-          götünü sikeyim yusuf durak
+          Sa ben berk sitem daha çalışma altında bu arada chronobreak bok gibi oyun. İncelemek isteyenler linke tıklayabilir:
+          https://store.steampowered.com/app/2408740/dgd_Chronobreak/
+        
 
         </p>
       </div>
