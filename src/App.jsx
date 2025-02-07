@@ -31,6 +31,9 @@ function App() {
         <p>
           Ibo Berk is the best
         </p>
+        <p>
+          But Suat is the superior
+        </p>
       </div>
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
