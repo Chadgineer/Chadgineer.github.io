@@ -27,6 +27,10 @@ function App() {
         
 
         </p>
+
+        <p>
+          Ibo Berk is the best
+        </p>
       </div>
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
