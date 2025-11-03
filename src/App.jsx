@@ -31,7 +31,7 @@ const App = () => {
         </div>
 
         <p className="text-gray-300 mb-6 leading-relaxed border-t border-gray-700 pt-6">
-          Selam, ben Berk. Sitem daha çalışma altında. Bu arada Chronobreak bok gibi bir oyun. İncelemek isteyenler **aşağıdaki linke** tıklayabilir:
+          Selam, ben Berk. Sitem daha çalışma altında. 
         </p>
 
         <div className="text-center mb-6">
