@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ExternalLink, Gamepad, Mail, Code, Github, Linkedin, Download, Trophy, Calendar, Image as ImageIcon, Send, Award, Briefcase, Languages } from 'lucide-react';
+import { ExternalLink, Gamepad, Mail, Code, Github, Linkedin, Download, Send, Briefcase } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
 const App = () => {
@@ -11,7 +11,8 @@ const App = () => {
 
   // TODO: Kendi bilgilerinizi doldurun
   const personalInfo = {
-    name: "Berk, a.k.a. Chadgineer", // İsminiz
+    name: "Berk", // İsminiz
+    nickname: "Chadgineer", // Nickname
     title: "Oyun Geliştiricisi, Oyun Tasarımcısı.", // Mesleğiniz/Unvanınız
     bio: "Esenlikler, ben Berk. Oyun geliştiriciliği yapıyorum ve yaratıcı projeler üretmeyi seviyorum.", // Kendiniz hakkında kısa açıklama
     about: "Oyun geliştirme konusunda tutkulu bir geliştiriciyim. Farklı türlerde oyunlar üretiyorum ve her projede yeni şeyler öğrenmeye devam ediyorum.", // Hakkınızda detaylı açıklama
@@ -123,9 +124,13 @@ const App = () => {
             <Gamepad size={80} className="text-blue-400 hover:animate-pulse transition duration-500" />
           </div>
           
-          <h1 className="text-5xl md:text-6xl font-extrabold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500">
+          <h1 className="text-5xl md:text-6xl font-extrabold mb-2 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500">
             {personalInfo.name}
           </h1>
+          
+          <p className="text-xl md:text-2xl text-gray-400 mb-4">
+            {personalInfo.nickname}
+          </p>
           
           <h2 className="text-2xl md:text-3xl font-semibold mb-6 text-gray-300">
             {t('personal.title')}
@@ -208,32 +213,6 @@ const App = () => {
           </div>
         </div>
 
-        {/* İstatistikler Bölümü */}
-        <section className="max-w-6xl mx-auto mb-16">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            <div className="bg-gradient-to-br from-blue-600/20 to-blue-800/20 backdrop-blur-sm p-6 rounded-xl border border-blue-500/30 text-center hover:scale-105 transform transition duration-300">
-              <Trophy className="w-8 h-8 text-blue-400 mx-auto mb-2" />
-              <div className="text-3xl font-bold text-blue-300 mb-1">{stats.projectsCompleted}+</div>
-              <div className="text-sm text-gray-400">{t('stats.projectsCompleted')}</div>
-            </div>
-            <div className="bg-gradient-to-br from-purple-600/20 to-purple-800/20 backdrop-blur-sm p-6 rounded-xl border border-purple-500/30 text-center hover:scale-105 transform transition duration-300">
-              <Gamepad className="w-8 h-8 text-purple-400 mx-auto mb-2" />
-              <div className="text-3xl font-bold text-purple-300 mb-1">{stats.gamesPublished}+</div>
-              <div className="text-sm text-gray-400">{t('stats.gamesPublished')}</div>
-            </div>
-            <div className="bg-gradient-to-br from-pink-600/20 to-pink-800/20 backdrop-blur-sm p-6 rounded-xl border border-pink-500/30 text-center hover:scale-105 transform transition duration-300">
-              <Calendar className="w-8 h-8 text-pink-400 mx-auto mb-2" />
-              <div className="text-3xl font-bold text-pink-300 mb-1">{stats.yearsExperience}+</div>
-              <div className="text-sm text-gray-400">{t('stats.yearsExperience')}</div>
-            </div>
-            <div className="bg-gradient-to-br from-green-600/20 to-green-800/20 backdrop-blur-sm p-6 rounded-xl border border-green-500/30 text-center hover:scale-105 transform transition duration-300">
-              <Code className="w-8 h-8 text-green-400 mx-auto mb-2" />
-              <div className="text-3xl font-bold text-green-300 mb-1">{stats.technologiesUsed}+</div>
-              <div className="text-sm text-gray-400">{t('stats.technologies')}</div>
-            </div>
-          </div>
-        </section>
-
         {/* Hakkımda Bölümü */}
         <section className="max-w-4xl mx-auto mb-16">
           <div className="bg-gray-800/50 backdrop-blur-sm p-8 rounded-2xl shadow-2xl border border-gray-700">
@@ -261,73 +240,6 @@ const App = () => {
               </div>
             </div>
           </div>
-        </section>
-
-        {/* Projeler Bölümü */}
-        <section className="max-w-6xl mx-auto mb-16">
-          <h2 className="text-3xl font-bold mb-8 text-center text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500">
-            {t('sections.projects')}
-          </h2>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {projects.map((project, index) => (
-              <div 
-                key={index}
-                className="bg-gray-800/50 backdrop-blur-sm rounded-xl shadow-xl border border-gray-700 hover:border-purple-500 transition duration-300 hover:shadow-2xl hover:scale-105 transform overflow-hidden"
-              >
-                {/* Proje Görseli */}
-                {project.image ? (
-                  <div className="w-full h-48 bg-gray-700 overflow-hidden">
-                    <img 
-                      src={project.image} 
-                      alt={project.name}
-                      className="w-full h-full object-cover hover:scale-110 transition duration-500"
-                    />
-                  </div>
-                ) : (
-                  <div className="w-full h-48 bg-gradient-to-br from-purple-900/30 to-blue-900/30 flex items-center justify-center">
-                    <Gamepad className="w-16 h-16 text-purple-400 opacity-50" />
-                  </div>
-                )}
-                
-                <div className="p-6">
-                  <div className="mb-4">
-                    <h3 className="text-xl font-bold mb-2 text-white">{project.name}</h3>
-                    <span className="text-sm text-purple-400 bg-purple-900/30 px-3 py-1 rounded-full">
-                      {t(`types.${project.type.toLowerCase()}`) || project.type}
-                    </span>
-                  </div>
-                  
-                  <p className="text-gray-400 mb-4">{project.description}</p>
-                  
-                  {/* Proje Etiketleri */}
-                  {project.tags && project.tags.length > 0 && (
-                    <div className="flex flex-wrap gap-2 mb-4">
-                      {project.tags.map((tag, tagIndex) => (
-                        <span 
-                          key={tagIndex}
-                          className="text-xs text-gray-400 bg-gray-700/50 px-2 py-1 rounded"
-                        >
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-                  )}
-                  
-                  <a 
-                    href={project.link} 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 text-blue-400 hover:text-blue-300 font-semibold transition duration-200"
-                  >
-                    {t('buttons.details')} <ExternalLink className="w-4 h-4" />
-                  </a>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          {/* Daha fazla proje eklemek için yukarıdaki projects array'ine yeni obje ekleyin */}
         </section>
 
         {/* Deneyim/Timeline Bölümü */}
@@ -424,7 +336,7 @@ const App = () => {
 
         {/* Footer */}
         <footer className="text-center py-8 text-gray-500 border-t border-gray-800">
-          <p>© {new Date().getFullYear()} {personalInfo.name}. {t('footer.rights')}</p>
+          <p>© {new Date().getFullYear()} {personalInfo.name} ({personalInfo.nickname}). {t('footer.rights')}</p>
           <p className="mt-2 text-sm">{t('footer.builtWith')}</p>
         </footer>
       </section>
