@@ -11,8 +11,8 @@ const App = () => {
 
   // TODO: Kendi bilgilerinizi doldurun
   const personalInfo = {
-    name: "Berk", // İsminiz
-    title: "Oyun Geliştiricisi", // Mesleğiniz/Unvanınız
+    name: "Berk, a.k.a. Chadgineer", // İsminiz
+    title: "Oyun Geliştiricisi, Oyun Tasarımcısı.", // Mesleğiniz/Unvanınız
     bio: "Esenlikler, ben Berk. Oyun geliştiriciliği yapıyorum ve yaratıcı projeler üretmeyi seviyorum.", // Kendiniz hakkında kısa açıklama
     about: "Oyun geliştirme konusunda tutkulu bir geliştiriciyim. Farklı türlerde oyunlar üretiyorum ve her projede yeni şeyler öğrenmeye devam ediyorum.", // Hakkınızda detaylı açıklama
     skills: ["Unity", "C#", "Game Design", "3D modelling"], // Yetenekleriniz/Teknolojileriniz
