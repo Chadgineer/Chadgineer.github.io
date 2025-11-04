@@ -8,27 +8,27 @@ const App = () => {
     title: "Oyun Geliştiricisi", // Mesleğiniz/Unvanınız
     bio: "Selam, ben Berk. Oyun geliştiriciliği yapıyorum ve yaratıcı projeler üretmeyi seviyorum.", // Kendiniz hakkında kısa açıklama
     about: "Oyun geliştirme konusunda tutkulu bir geliştiriciyim. Farklı türlerde oyunlar üretiyorum ve her projede yeni şeyler öğrenmeye devam ediyorum.", // Hakkınızda detaylı açıklama
-    skills: ["Unity", "C#", "Game Design"], // Yetenekleriniz/Teknolojileriniz
-    email: "berk@example.com" // E-posta adresiniz
+    skills: ["Unity", "C#", "Game Design, 3D modelling"], // Yetenekleriniz/Teknolojileriniz
+    email: "iberker37@gmail.com" // E-posta adresiniz
   };
 
   // TODO: Sosyal medya ve platform linklerinizi ekleyin
   const socialLinks = {
-    itch: "https://itch.io/profile/yourusername", // Itch.io profil linkiniz
-    linkedin: "https://linkedin.com/in/yourusername", // LinkedIn profil linkiniz
+    itch: "https://chadgineer.itch.io", // Itch.io profil linkiniz
+    linkedin: "https://www.linkedin.com/in/ibrahim-berk-er-33612b295", // LinkedIn profil linkiniz
     github: "https://github.com/Chadgineer", // GitHub profil linkiniz
-    steam: "https://store.steampowered.com/app/2408740/dgd_Chronobreak/", // Steam sayfanız veya oyun linkiniz
+    steam: "https://steamcommunity.com/profiles/76561198294279253/", // Steam sayfanız veya oyun linkiniz
     email: personalInfo.email
   };
 
   // TODO: Projelerinizi/Oyunlarınızı ekleyin
   const projects = [
-    {
+    /*{
       name: "Chronobreak",
       description: "Steam'de yayınlanmış oyunum.",
       link: socialLinks.steam,
       type: "Oyun"
-    },
+    }*/ ,
     // Daha fazla proje eklemek için buraya yeni obje ekleyin:
     // {
     //   name: "Proje Adı",
