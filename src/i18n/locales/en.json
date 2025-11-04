@@ -1,0 +1,53 @@
+{
+  "hero": {
+    "title": "Game Developer",
+    "bio": "Hello, I'm Berk. I'm a game developer and I love creating creative projects."
+  },
+  "personal": {
+    "name": "Berk",
+    "title": "Game Developer",
+    "bio": "Hello, I'm Berk. I'm a game developer and I love creating creative projects.",
+    "about": "I'm a passionate developer in game development. I create games in different genres and continue to learn new things in every project."
+  },
+  "stats": {
+    "projectsCompleted": "Completed Projects",
+    "gamesPublished": "Published Games",
+    "yearsExperience": "Years Experience",
+    "technologies": "Technologies"
+  },
+  "sections": {
+    "about": "About Me",
+    "skills": "Skills & Technologies",
+    "projects": "My Projects & Games",
+    "experience": "Experience & Education",
+    "contact": "Get In Touch"
+  },
+  "buttons": {
+    "downloadCV": "Download CV",
+    "contact": "Contact",
+    "details": "Details",
+    "send": "Send"
+  },
+  "form": {
+    "name": "Name",
+    "namePlaceholder": "Your name",
+    "email": "Email",
+    "emailPlaceholder": "email@example.com",
+    "message": "Message",
+    "messagePlaceholder": "Write your message here..."
+  },
+  "types": {
+    "game": "Game",
+    "tool": "Tool",
+    "other": "Other",
+    "work": "Work",
+    "education": "Education"
+  },
+  "footer": {
+    "rights": "All rights reserved.",
+    "builtWith": "This site is built with React and Vite."
+  },
+  "contact": {
+    "subject": "Contact"
+  }
+}

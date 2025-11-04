@@ -1,0 +1,53 @@
+{
+  "hero": {
+    "title": "Oyun Geliştiricisi",
+    "bio": "Esenlikler, ben Berk. Oyun geliştiriciliği yapıyorum ve yaratıcı projeler üretmeyi seviyorum."
+  },
+  "personal": {
+    "name": "Berk",
+    "title": "Oyun Geliştiricisi",
+    "bio": "Esenlikler, ben Berk. Oyun geliştiriciliği yapıyorum ve yaratıcı projeler üretmeyi seviyorum.",
+    "about": "Oyun geliştirme konusunda tutkulu bir geliştiriciyim. Farklı türlerde oyunlar üretiyorum ve her projede yeni şeyler öğrenmeye devam ediyorum."
+  },
+  "stats": {
+    "projectsCompleted": "Tamamlanan Proje",
+    "gamesPublished": "Yayınlanan Oyun",
+    "yearsExperience": "Yıl Deneyim",
+    "technologies": "Teknoloji"
+  },
+  "sections": {
+    "about": "Hakkımda",
+    "skills": "Yetenekler & Teknolojiler",
+    "projects": "Projelerim & Oyunlarım",
+    "experience": "Deneyim & Eğitim",
+    "contact": "İletişime Geçin"
+  },
+  "buttons": {
+    "downloadCV": "CV İndir",
+    "contact": "İletişim",
+    "details": "Detaylar",
+    "send": "Gönder"
+  },
+  "form": {
+    "name": "İsim",
+    "namePlaceholder": "İsminiz",
+    "email": "E-posta",
+    "emailPlaceholder": "email@example.com",
+    "message": "Mesaj",
+    "messagePlaceholder": "Mesajınızı buraya yazın..."
+  },
+  "types": {
+    "game": "Oyun",
+    "tool": "Tool",
+    "other": "Diğer",
+    "work": "İş",
+    "education": "Eğitim"
+  },
+  "footer": {
+    "rights": "Tüm hakları saklıdır.",
+    "builtWith": "Bu site React ve Vite ile geliştirilmiştir."
+  },
+  "contact": {
+    "subject": "İletişim"
+  }
+}
