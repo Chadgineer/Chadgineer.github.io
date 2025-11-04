@@ -8,7 +8,7 @@ const App = () => {
     title: "Oyun Geliştiricisi", // Mesleğiniz/Unvanınız
     bio: "Selam, ben Berk. Oyun geliştiriciliği yapıyorum ve yaratıcı projeler üretmeyi seviyorum.", // Kendiniz hakkında kısa açıklama
     about: "Oyun geliştirme konusunda tutkulu bir geliştiriciyim. Farklı türlerde oyunlar üretiyorum ve her projede yeni şeyler öğrenmeye devam ediyorum.", // Hakkınızda detaylı açıklama
-    skills: ["Unity", "C#", "Game Design, 3D modelling"], // Yetenekleriniz/Teknolojileriniz
+    skills: ["Unity", "C#", "Game Design", "3D modelling"], // Yetenekleriniz/Teknolojileriniz
     email: "iberker37@gmail.com" // E-posta adresiniz
   };
 
