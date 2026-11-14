@@ -7,7 +7,7 @@
     "name": "Berk",
     "title": "Game Developer",
     "bio": "Hello, I'm Berk. I'm a game developer and I love creating creative projects.",
-    "about": "I'm a passionate developer in game development. I create games in different genres and continue to learn new things in every project."
+    "about": "I am passionate about game development. I make games across different genres and keep learning something new with every project."
   },
   "stats": {
     "projectsCompleted": "Completed Projects",
@@ -48,6 +48,10 @@
     "builtWith": "This site is built with React and Vite."
   },
   "contact": {
-    "subject": "Contact"
+    "subject": "Contact",
+    "orEmail": "or email me directly:"
+  },
+  "nav": {
+    "projects": "Projects"
   }
 }

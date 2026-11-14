@@ -48,6 +48,10 @@
     "builtWith": "Bu site React ve Vite ile geliştirilmiştir."
   },
   "contact": {
-    "subject": "İletişim"
+    "subject": "İletişim",
+    "orEmail": "ya da doğrudan e-posta gönderin:"
+  },
+  "nav": {
+    "projects": "Projeler"
   }
 }

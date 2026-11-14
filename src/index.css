@@ -1,11 +1,11 @@
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: Inter, system-ui, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
   color-scheme: dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #1a1a1a;
+  color: #f3f4f6;
+  background-color: #030712;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -17,10 +17,15 @@
   box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
+  background-color: #030712;
 }
 
 #root {
@@ -28,25 +33,61 @@ body {
   min-height: 100vh;
 }
 
-/* Smooth scrolling */
-html {
-  scroll-behavior: smooth;
+::selection {
+  background: rgba(139, 92, 246, 0.4);
+  color: #fff;
 }
 
-/* Custom scrollbar */
+/* Klavye ile gezinirken görünür odak */
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid #60a5fa;
+  outline-offset: 3px;
+  border-radius: 0.5rem;
+}
+
+/* Giriş animasyonu */
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-up {
+  animation: fade-up 0.7s ease-out both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* Özel kaydırma çubuğu */
 ::-webkit-scrollbar {
   width: 10px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #1a1a1a;
+  background: #030712;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #4a5568;
+  background: #374151;
   border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #5a6578;
+  background: #4b5563;
 }
