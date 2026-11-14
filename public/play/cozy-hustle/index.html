@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <!-- Sadece linki olanlar için: arama motorlarına kapalı -->
+    <meta name="robots" content="noindex, nofollow, noarchive" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+    <meta name="theme-color" content="#030712" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="Cozy Hustle" />
+    <link rel="manifest" href="manifest.webmanifest" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>Cozy Hustle</title>
+    <style>
+      :root {
+        --bg: #030712;
+        --fg: #f3f4f6;
+        --muted: #9ca3af;
+        --accent: linear-gradient(90deg, #3b82f6, #a855f7, #ec4899);
+      }
+      * { box-sizing: border-box; }
+      html, body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+        color: var(--fg);
+        font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+        overflow: hidden;
+        overscroll-behavior: none;
+        -webkit-user-select: none;
+        user-select: none;
+        -webkit-tap-highlight-color: transparent;
+        -webkit-touch-callout: none;
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100dvh;
+      }
+
+      /* Telefonda tam ekran; geniş ekranda 9:16 telefon çerçevesi */
+      #stage {
+        position: relative;
+        width: 100vw;
+        height: 100dvh;
+        background: #000;
+        overflow: hidden;
+      }
+      @media (min-aspect-ratio: 3/4) and (min-height: 560px) {
+        #stage {
+          height: min(100dvh - 48px, 960px);
+          width: auto;
+          aspect-ratio: 9 / 16;
+          border-radius: 28px;
+          box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.08), 0 30px 80px rgba(88, 28, 135, 0.35);
+        }
+      }
+
+      #unity-canvas {
+        display: block;
+        width: 100%;
+        height: 100%;
+        background: #000;
+        touch-action: none;
+        outline: none;
+      }
+
+      .overlay {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 18px;
+        padding: 24px;
+        text-align: center;
+        background: radial-gradient(circle at 50% 35%, #1e1b4b 0%, var(--bg) 70%);
+        transition: opacity 0.4s ease;
+      }
+      .overlay.hidden { opacity: 0; pointer-events: none; }
+      .title {
+        font-size: 30px;
+        font-weight: 800;
+        letter-spacing: -0.02em;
+        background: var(--accent);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
+      .msg { color: var(--muted); font-size: 14px; max-width: 280px; line-height: 1.5; }
+      .bar {
+        width: min(240px, 70%);
+        height: 8px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.08);
+        overflow: hidden;
+      }
+      .bar > div {
+        width: 0%;
+        height: 100%;
+        border-radius: inherit;
+        background: var(--accent);
+        transition: width 0.2s ease;
+      }
+      .error .title { background: none; color: #f87171; font-size: 22px; }
+      button.retry {
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        background: rgba(255, 255, 255, 0.06);
+        color: var(--fg);
+        font: inherit;
+        font-weight: 600;
+        padding: 10px 18px;
+        border-radius: 12px;
+      }
+
+      /* Telefon yan çevrilince uyarı */
+      #rotate { display: none; z-index: 10; }
+      @media (orientation: landscape) and (pointer: coarse) and (max-height: 540px) {
+        #rotate { display: flex; }
+      }
+      .phone {
+        width: 44px;
+        height: 72px;
+        border: 3px solid var(--fg);
+        border-radius: 10px;
+        animation: tilt 1.6s ease-in-out infinite;
+      }
+      @keyframes tilt {
+        0%, 100% { transform: rotate(-90deg); }
+        50% { transform: rotate(0deg); }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="stage">
+      <canvas id="unity-canvas" tabindex="-1"></canvas>
+
+      <div id="loading" class="overlay">
+        <div class="title">Cozy Hustle</div>
+        <div class="bar"><div id="bar-fill"></div></div>
+        <div class="msg" id="loading-text"></div>
+      </div>
+
+      <div id="error" class="overlay error hidden">
+        <div class="title" id="error-title"></div>
+        <div class="msg" id="error-text"></div>
+        <button class="retry" id="retry" type="button"></button>
+      </div>
+
+      <div id="rotate" class="overlay">
+        <div class="phone"></div>
+        <div class="msg" id="rotate-text"></div>
+      </div>
+    </div>
+
+    <script>
+      (function () {
+        var tr = (navigator.language || 'tr').toLowerCase().indexOf('tr') === 0;
+        var T = tr
+          ? {
+              loading: 'Yükleniyor…',
+              starting: 'Başlatılıyor…',
+              rotate: 'Oynamak için telefonu dik tut.',
+              soonTitle: 'Yakında',
+              soonText: 'Oyun henüz yüklenmedi. Biraz sonra tekrar dene.',
+              errTitle: 'Oyun açılamadı',
+              errText: 'Bağlantını kontrol edip tekrar dene.',
+              noWebgl: 'Tarayıcın WebGL desteklemiyor. Güncel Chrome veya Safari ile dene.',
+              retry: 'Tekrar dene'
+            }
+          : {
+              loading: 'Loading…',
+              starting: 'Starting…',
+              rotate: 'Hold your phone upright to play.',
+              soonTitle: 'Coming soon',
+              soonText: 'The game has not been uploaded yet. Check back soon.',
+              errTitle: 'Could not start the game',
+              errText: 'Check your connection and try again.',
+              noWebgl: 'Your browser does not support WebGL. Try a recent Chrome or Safari.',
+              retry: 'Try again'
+            };
+        if (!tr) document.documentElement.lang = 'en';
+
+        var $ = function (id) { return document.getElementById(id); };
+        $('loading-text').textContent = T.loading;
+        $('rotate-text').textContent = T.rotate;
+        $('retry').textContent = T.retry;
+        $('retry').onclick = function () { location.reload(); };
+
+        function showError(title, text, canRetry) {
+          $('loading').classList.add('hidden');
+          $('error-title').textContent = title;
+          $('error-text').textContent = text;
+          $('retry').style.display = canRetry ? '' : 'none';
+          $('error').classList.remove('hidden');
+        }
+
+        // Tarayıcı jestlerini engelle (çift dokunuşla zoom, uzun basınca menü, iOS pinch)
+        document.addEventListener('contextmenu', function (e) { e.preventDefault(); });
+        document.addEventListener('gesturestart', function (e) { e.preventDefault(); });
+        document.addEventListener('dblclick', function (e) { e.preventDefault(); }, { passive: false });
+
+        function loadScript(src, onload, onerror) {
+          var s = document.createElement('script');
+          s.src = src;
+          s.onload = onload;
+          s.onerror = onerror;
+          document.body.appendChild(s);
+        }
+
+        // build-config.js her açılışta taze alınır, böylece yeni build hemen görünür
+        loadScript('build-config.js?t=' + Date.now(), start, function () {
+          showError(T.soonTitle, T.soonText, false);
+        });
+
+        function start() {
+          var b = window.COZY_BUILD;
+          if (!b) {
+            showError(T.soonTitle, T.soonText, false);
+            return;
+          }
+          var probe = document.createElement('canvas');
+          if (!(probe.getContext('webgl2') || probe.getContext('webgl'))) {
+            showError(T.errTitle, T.noWebgl, false);
+            return;
+          }
+
+          var v = '?v=' + encodeURIComponent(b.version);
+          var config = {
+            dataUrl: b.dataUrl + v,
+            frameworkUrl: b.frameworkUrl + v,
+            codeUrl: b.codeUrl + v,
+            streamingAssetsUrl: 'StreamingAssets',
+            companyName: b.companyName || 'Chadgineer',
+            productName: b.productName || 'Cozy Hustle',
+            productVersion: b.productVersion || '0.1',
+            // Telefonlarda 3x çözünürlük gereksiz yük; 2x yeterince keskin
+            devicePixelRatio: Math.min(window.devicePixelRatio || 1, 2),
+            showBanner: function (msg, type) {
+              if (type === 'error') console.error(msg);
+              else console.warn(msg);
+            }
+          };
+          if (b.symbolsUrl) config.symbolsUrl = b.symbolsUrl + v;
+
+          loadScript(b.loaderUrl + v, function () {
+            createUnityInstance($('unity-canvas'), config, function (p) {
+              $('bar-fill').style.width = Math.round(p * 100) + '%';
+              if (p >= 0.9) $('loading-text').textContent = T.starting;
+            })
+              .then(function (instance) {
+                window.unityInstance = instance;
+                $('loading').classList.add('hidden');
+                $('unity-canvas').focus();
+              })
+              .catch(function (err) {
+                console.error(err);
+                showError(T.errTitle, T.errText, true);
+              });
+          }, function () {
+            showError(T.errTitle, T.errText, true);
+          });
+        }
+      })();
+    </script>
+  </body>
+</html>
